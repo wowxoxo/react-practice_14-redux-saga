@@ -8,6 +8,8 @@ import "./index.css";
 import App from "./App";
 import { mainReducer } from "./store";
 import { rootSaga } from "./store/sagas";
+// import { rootSaga } from "./store/sagas-with-action-channel";
+import { loginFlowSaga } from "./store/sagas-login-flow-non-blocking";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -22,6 +24,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(loginFlowSaga);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -4,8 +4,10 @@ import {
   takeEvery,
   put,
   call,
-  takeLatest
+  takeLatest,
+  actionChannel
 } from "redux-saga/effects";
+import { buffers } from "redux-saga";
 import { INCREMENT, INCREMENT_ASYNC } from "./counter/actions";
 import { delay } from "../utils/delay";
 import {
@@ -55,8 +57,15 @@ export function* fetchUserPostsWorker(action) {
 }
 
 export function* userPostsFetchRequestedWatcherSaga() {
-  // yield takeEvery(USER_POSTS_FETCH_REQUESTED, fetchUserPostsWorker);
-  yield takeLatest(USER_POSTS_FETCH_REQUESTED, fetchUserPostsWorker);
+  // yield takeLatest(USER_POSTS_FETCH_REQUESTED, fetchUserPostsWorker);
+  const requestChannel = yield actionChannel(
+    USER_POSTS_FETCH_REQUESTED,
+    buffers.none()
+  );
+  while (true) {
+    const action = yield take(requestChannel);
+    yield call(fetchUserPostsWorker, action);
+  }
 }
 
 export function* rootSaga() {
