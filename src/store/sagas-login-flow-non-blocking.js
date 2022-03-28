@@ -14,7 +14,6 @@ export function* authorize(username, password) {
     const token = yield call(userApi.login, username, password);
     yield call(userApi.saveToken, username, token);
     yield put({ type: LOGIN_SUCCESS, payload: { token } });
-    return token;
   } catch (error) {
     yield put({ type: LOGIN_ERROR, payload: { error } });
   } finally {

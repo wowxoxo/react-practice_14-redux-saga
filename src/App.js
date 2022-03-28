@@ -10,17 +10,34 @@ import Login from "./Login";
 function App() {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch({ type: USER_POSTS_FETCH_REQUESTED, payload: { userId: 1 } });
-    dispatch({ type: USER_POSTS_FETCH_REQUESTED, payload: { userId: 1 } });
-    dispatch({ type: USER_POSTS_FETCH_REQUESTED, payload: { userId: 1 } });
-    dispatch({ type: USER_POSTS_FETCH_REQUESTED, payload: { userId: 1 } });
-    dispatch({ type: USER_POSTS_FETCH_REQUESTED, payload: { userId: 1 } });
+    dispatch({
+      type: USER_POSTS_FETCH_REQUESTED,
+      payload: { userId: 1, id: 1 }
+    });
+    dispatch({
+      type: USER_POSTS_FETCH_REQUESTED,
+      payload: { userId: 1, id: 2 }
+    });
+    dispatch({
+      type: USER_POSTS_FETCH_REQUESTED,
+      payload: { userId: 1, id: 3 }
+    });
+    dispatch({
+      type: USER_POSTS_FETCH_REQUESTED,
+      payload: { userId: 1, id: 4 }
+    });
+    dispatch({
+      type: USER_POSTS_FETCH_REQUESTED,
+      payload: { userId: 1, id: 5 }
+    });
   };
 
   return (
     <div className="app container">
       <Counter />
+      <hr />
       <Login />
+      <hr />
       <Button type="button" variant="primary" onClick={handleClick}>
         Click
       </Button>

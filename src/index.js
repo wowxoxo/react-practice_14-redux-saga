@@ -10,6 +10,9 @@ import { mainReducer } from "./store";
 import { rootSaga } from "./store/sagas";
 // import { rootSaga } from "./store/sagas-with-action-channel";
 import { loginFlowSaga } from "./store/sagas-login-flow-non-blocking";
+import { forkSaga } from "./store/sagas-fork";
+import { takeSagaRootWatcher } from "./store/sagas-takes";
+import { countdownSaga } from "./store/saga-countdown-event-channel";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -23,8 +26,11 @@ const store = createStore(
   )
 );
 
-sagaMiddleware.run(rootSaga);
+// sagaMiddleware.run(rootSaga);
 sagaMiddleware.run(loginFlowSaga);
+// sagaMiddleware.run(forkSaga);
+sagaMiddleware.run(takeSagaRootWatcher);
+sagaMiddleware.run(countdownSaga);
 
 ReactDOM.render(
   <Provider store={store}>
