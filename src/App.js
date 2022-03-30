@@ -3,32 +3,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
-import { USER_POSTS_FETCH_REQUESTED } from "./store/posts/actions";
+import {
+  CHANGE_USERNAME,
+  requestUserPosts,
+  USER_POSTS_FETCH_REQUESTED
+} from "./store/posts/actions";
 import Counter from "./Counter";
 import Login from "./Login";
+import Uploader from "./Uploader";
+import { Form } from "react-bootstrap";
 
 function App() {
   const dispatch = useDispatch();
   const handleClick = () => {
+    try {
+      for (let dispatchId = 1; dispatchId <= 5; dispatchId++) {
+        // dispatch({
+        //   type: USER_POSTS_FETCH_REQUESTED,
+        //   payload: { userId: 1, id: dispatchId }
+        // });
+        dispatch(requestUserPosts({ userId: 1, id: dispatchId }));
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const handleUsernameChange = (event) => {
     dispatch({
-      type: USER_POSTS_FETCH_REQUESTED,
-      payload: { userId: 1, id: 1 }
-    });
-    dispatch({
-      type: USER_POSTS_FETCH_REQUESTED,
-      payload: { userId: 1, id: 2 }
-    });
-    dispatch({
-      type: USER_POSTS_FETCH_REQUESTED,
-      payload: { userId: 1, id: 3 }
-    });
-    dispatch({
-      type: USER_POSTS_FETCH_REQUESTED,
-      payload: { userId: 1, id: 4 }
-    });
-    dispatch({
-      type: USER_POSTS_FETCH_REQUESTED,
-      payload: { userId: 1, id: 5 }
+      type: CHANGE_USERNAME,
+      payload: { username: event.target.value }
     });
   };
 
@@ -41,6 +45,15 @@ function App() {
       <Button type="button" variant="primary" onClick={handleClick}>
         Click
       </Button>
+      <hr />
+      <Uploader />
+      <hr />
+      <Form.Control
+        size="md"
+        type="text"
+        placeholder="Username"
+        onChange={handleUsernameChange}
+      />
     </div>
   );
 }

@@ -35,3 +35,12 @@ export const getToken = () => {
 export const clearToken = () => {
   localStorage.removeItem("token");
 };
+
+export const saveUsernameOnServer = (username) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(`saved ${username}`);
+      resolve();
+    }, 500);
+  });
+};

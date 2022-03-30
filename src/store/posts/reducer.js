@@ -1,12 +1,14 @@
 import {
   SAVE_USER_ALBUMS,
   USER_POSTS_FETCH_SUCCEEDED,
-  SAVE_USER_POSTS
+  SAVE_USER_POSTS,
+  FILES_UPLOADING_PROGRESS
 } from "./actions";
 
 const initState = {
   posts: [],
-  albums: []
+  albums: [],
+  filesUploadingProgress: 0
 };
 
 export const postsReducer = (state = initState, action) => {
@@ -26,6 +28,11 @@ export const postsReducer = (state = initState, action) => {
     //   const posts = action.payload.data;
     //   return { ...state, posts };
     // }
+
+    case FILES_UPLOADING_PROGRESS: {
+      const filesUploadingProgress = action.payload.progressValue;
+      return { ...state, filesUploadingProgress };
+    }
 
     default:
       return state;
