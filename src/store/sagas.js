@@ -4,10 +4,11 @@ import {
   takeEvery,
   put,
   call,
-  takeLatest
+  takeLatest,
+  delay
 } from "redux-saga/effects";
 import { INCREMENT, INCREMENT_ASYNC } from "./counter/actions";
-import { delay } from "../utils/delay";
+// import { delay } from "../utils/delay";
 import {
   USER_POSTS_FETCH_REQUESTED,
   USER_POSTS_FETCH_SUCCEEDED,
@@ -30,7 +31,7 @@ export function* eachSagaWatcher() {
 
 export function* incrementAsyncWorker() {
   // yield delay(1000);
-  yield call(delay, 1000);
+  yield delay(1000);
   yield put({ type: INCREMENT });
 }
 
