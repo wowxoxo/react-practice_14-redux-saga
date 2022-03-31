@@ -5,7 +5,9 @@ import {
   put,
   call,
   takeLatest,
-  actionChannel
+  actionChannel,
+  getContext,
+  setContext
 } from "redux-saga/effects";
 import { buffers } from "redux-saga";
 import { INCREMENT, INCREMENT_ASYNC } from "./counter/actions";
@@ -15,7 +17,7 @@ import {
   USER_POSTS_FETCH_SUCCEEDED,
   USER_POSTS_FETCH_FAILED
 } from "./posts/actions";
-import * as postsApi from "../api/posts";
+// import * as postsApi from "../api/posts";
 
 export function* loggerSaga() {
   console.log("logger saga");
@@ -43,7 +45,12 @@ export function* watchIncrementAsync() {
 export function* fetchUserPostsWorker(action) {
   yield delay(500);
   try {
+    const postsApi = yield getContext("postsApi");
     const userPosts = yield call(postsApi.getUserPosts, action.payload.userId);
+
+    const appVersion = yield getContext("appVersion");
+    console.log("appVersion", appVersion);
+
     yield put({
       type: USER_POSTS_FETCH_SUCCEEDED,
       payload: { data: userPosts }
@@ -62,13 +69,17 @@ export function* userPostsFetchRequestedWatcherSaga() {
     USER_POSTS_FETCH_REQUESTED,
     buffers.none()
   );
+
+  yield setContext({
+    appVersion: "1.0.0"
+  });
   while (true) {
     const action = yield take(requestChannel);
     yield call(fetchUserPostsWorker, action);
   }
 }
 
-export function* rootSaga() {
+export function* rootSagaWitchActionChannel() {
   yield all([
     loggerSaga(),
     eachSagaWatcher(),
