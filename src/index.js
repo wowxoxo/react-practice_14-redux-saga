@@ -19,6 +19,7 @@ import { filesUploadingChannelSaga } from "./store/sagas-upload-channel";
 import { sagaThrottleDebounce } from "./store/sagas-throttle-debounce";
 import * as postsApi from "./api/posts";
 import { rootSaga1, rootSaga4, rootSaga5 } from "./store/sagas-root-saga";
+import { userPostsRaceSaga } from "./store/sagas-race";
 
 const sagaMiddleware = createSagaMiddleware({
   context: {
@@ -46,7 +47,8 @@ sagaMiddleware.run(loginFlowSaga);
 sagaMiddleware.run(channelSaga);
 sagaMiddleware.run(filesUploadingChannelSaga);
 sagaMiddleware.run(sagaThrottleDebounce);
-sagaMiddleware.run(rootSaga5);
+// sagaMiddleware.run(rootSaga5);
+sagaMiddleware.run(userPostsRaceSaga);
 
 ReactDOM.render(
   <Provider store={store}>

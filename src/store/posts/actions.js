@@ -1,6 +1,7 @@
 export const USER_POSTS_FETCH_REQUESTED = "USER_POSTS_FETCH_REQUESTED";
 export const USER_POSTS_FETCH_SUCCEEDED = "USER_POSTS_FETCH_SUCCEEDED";
 export const USER_POSTS_FETCH_FAILED = "USER_POSTS_FETCH_FAILED";
+export const USER_POSTS_FETCH_CANCEL = "USER_POSTS_FETCH_CANCEL";
 export const requestUserPosts = ({ userId, id }) => {
   console.log(
     `Received action USER_POSTS_FETCH_REQUESTED with dispatch id ${id}`

@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   CHANGE_USERNAME,
   requestUserPosts,
+  USER_POSTS_FETCH_CANCEL,
   USER_POSTS_FETCH_REQUESTED
 } from "./store/posts/actions";
 import Counter from "./Counter";
@@ -29,6 +30,10 @@ function App() {
     }
   };
 
+  const handleCancelClick = () => {
+    dispatch({ type: USER_POSTS_FETCH_CANCEL });
+  };
+
   const handleUsernameChange = (event) => {
     dispatch({
       type: CHANGE_USERNAME,
@@ -44,6 +49,9 @@ function App() {
       <hr />
       <Button type="button" variant="primary" onClick={handleClick}>
         Click
+      </Button>
+      <Button type="button" variant="danger" onClick={handleCancelClick}>
+        Cancel
       </Button>
       <hr />
       <Uploader />
