@@ -5,7 +5,7 @@ import * as postsApi from "../api/posts";
 import {
   USER_POSTS_FETCH_FAILED,
   USER_POSTS_FETCH_SUCCEEDED
-} from "./posts/actions";
+} from "./posts/action-types";
 import { cloneableGenerator } from "@redux-saga/testing-utils";
 import { runSaga } from "redux-saga";
 

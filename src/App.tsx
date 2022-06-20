@@ -5,14 +5,15 @@ import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import {
   CHANGE_USERNAME,
-  requestUserPosts,
   USER_POSTS_FETCH_CANCEL,
   USER_POSTS_FETCH_REQUESTED
-} from "./store/posts/actions";
+} from "./store/posts/action-types";
 import Counter from "./Counter";
 import Login from "./Login";
 import Uploader from "./Uploader";
 import { Form } from "react-bootstrap";
+import React from "react";
+import { requestUserPosts } from "./store/posts/actions-creators";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ function App() {
     dispatch({ type: USER_POSTS_FETCH_CANCEL });
   };
 
-  const handleUsernameChange = (event) => {
+  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: CHANGE_USERNAME,
       payload: { username: event.target.value }
@@ -57,7 +58,6 @@ function App() {
       <Uploader />
       <hr />
       <Form.Control
-        size="md"
         type="text"
         placeholder="Username"
         onChange={handleUsernameChange}

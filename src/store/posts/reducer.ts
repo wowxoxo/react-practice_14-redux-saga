@@ -2,8 +2,10 @@ import {
   SAVE_USER_ALBUMS,
   USER_POSTS_FETCH_SUCCEEDED,
   SAVE_USER_POSTS,
-  FILES_UPLOADING_PROGRESS
-} from "./actions";
+  FILES_UPLOADING_PROGRESS,
+  UserPostsActionType
+} from "./action-types";
+import { UserPostsAction } from "./actions";
 
 const initState = {
   posts: [],
@@ -11,9 +13,10 @@ const initState = {
   filesUploadingProgress: 0
 };
 
-export const postsReducer = (state = initState, action) => {
+export const postsReducer = (state = initState, action: UserPostsAction) => {
   switch (action.type) {
     case USER_POSTS_FETCH_SUCCEEDED:
+    case UserPostsActionType.FETCH_SUCCEEDED:
     case SAVE_USER_POSTS: {
       const posts = action.payload.data;
       return { ...state, posts };

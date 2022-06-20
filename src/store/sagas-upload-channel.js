@@ -4,7 +4,7 @@ import { uploadFile } from "../api/file-uploader";
 import {
   FILES_UPLOADING_PROGRESS,
   FILES_UPLOADING_START
-} from "./posts/actions";
+} from "./posts/action-types";
 
 const handleProgress = (fileUploadingChannel, progressValue) => {
   fileUploadingChannel.put({ value: progressValue });

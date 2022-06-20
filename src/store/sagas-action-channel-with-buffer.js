@@ -14,7 +14,7 @@ import {
   USER_POSTS_FETCH_REQUESTED,
   USER_POSTS_FETCH_SUCCEEDED,
   USER_POSTS_FETCH_FAILED
-} from "./posts/actions";
+} from "./posts/action-types";
 import * as postsApi from "../api/posts";
 
 export function* fetchUserPostsWorker(action) {

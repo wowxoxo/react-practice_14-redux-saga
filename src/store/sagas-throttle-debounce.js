@@ -1,6 +1,6 @@
 import { take, fork, call, throttle, debounce } from "redux-saga/effects";
 import { saveUsernameOnServer } from "../api/user";
-import { CHANGE_USERNAME } from "./posts/actions";
+import { CHANGE_USERNAME } from "./posts/action-types";
 
 function* changeUsernameWorker(action) {
   console.log("username", action.payload.username);

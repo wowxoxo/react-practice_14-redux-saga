@@ -10,13 +10,13 @@ import {
   setContext
 } from "redux-saga/effects";
 import { buffers } from "redux-saga";
-import { INCREMENT, INCREMENT_ASYNC } from "./counter/actions";
+import { INCREMENT, INCREMENT_ASYNC } from "./counter/action-types";
 import { delay } from "../utils/delay";
 import {
   USER_POSTS_FETCH_REQUESTED,
   USER_POSTS_FETCH_SUCCEEDED,
   USER_POSTS_FETCH_FAILED
-} from "./posts/actions";
+} from "./posts/action-types";
 // import * as postsApi from "../api/posts";
 
 export function* loggerSaga() {

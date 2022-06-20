@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { ProgressBar } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { FILES_UPLOADING_START } from "./store/posts/actions";
+import { FILES_UPLOADING_START } from "./store/posts/action-types";
 
 const Uploader = () => {
   const dispatch = useDispatch();

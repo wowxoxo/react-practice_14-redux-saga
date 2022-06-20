@@ -6,7 +6,7 @@ import {
   SAVE_USER_ALBUMS,
   SAVE_USER_POSTS,
   USER_POSTS_FETCH_REQUESTED
-} from "./posts/actions";
+} from "./posts/action-types";
 
 function* getAlbums(userId) {
   const data = yield call(getUserAlbums, userId);

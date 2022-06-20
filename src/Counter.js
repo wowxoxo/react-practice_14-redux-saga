@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { INCREMENT, DECREMENT, INCREMENT_ASYNC } from "./store/counter/actions";
+import { INCREMENT, DECREMENT, INCREMENT_ASYNC } from "./store/counter/action-types";
 
 const Counter = () => {
   const counter = useSelector((state) => state.counter.counter);

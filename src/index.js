@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 
 import "./index.css";
-import App from "./App";
+import App from "./App.tsx";
 import { mainReducer } from "./store";
 import { rootSaga } from "./store/sagas";
 import { rootSagaWitchActionChannel } from "./store/sagas-with-action-channel";
@@ -37,7 +37,7 @@ const store = createStore(
   )
 );
 
-// sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga)
 // sagaMiddleware.run(rootSagaWitchActionChannel);
 sagaMiddleware.run(loginFlowSaga);
 // sagaMiddleware.run(forkSaga);
