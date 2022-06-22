@@ -7,15 +7,13 @@ import {
   takeLatest,
   delay
 } from "redux-saga/effects";
-import { INCREMENT, INCREMENT_ASYNC } from "./counter/action-types";
+import { CounterActionType } from "./counter/action-types";
 // import { delay } from "../utils/delay";
-import {
-  USER_POSTS_FETCH_REQUESTED,
-  USER_POSTS_FETCH_SUCCEEDED,
-  USER_POSTS_FETCH_FAILED
-} from "./posts/action-types";
+import { UserPostsActionType } from "./posts/action-types";
 import * as postsApi from "../api/posts";
 import { CounterAction } from "./counter/actions";
+import { requestUserPostsAction, UserPostsAction } from "./posts/actions";
+import { PostI } from "../interfaces/posts";
 
 export function* loggerSaga() {
   console.log("logger saga");
@@ -33,32 +31,38 @@ export function* eachSagaWatcher() {
 export function* incrementAsyncWorker() {
   // yield delay(1000);
   yield delay(1000);
-  yield put({ type: INCREMENT });
+  yield put<CounterAction>({ type: CounterActionType.INCREMENT });
 }
 
 export function* watchIncrementAsync() {
-  yield takeEvery(INCREMENT_ASYNC, incrementAsyncWorker);
+  yield takeEvery<CounterAction>(
+    CounterActionType.INCREMENT_ASYNC,
+    incrementAsyncWorker
+  );
 }
 
-export function* fetchUserPostsWorker(action) {
+export function* fetchUserPostsWorker(action: requestUserPostsAction) {
   yield delay(500);
   try {
-    const userPosts = yield call(postsApi.getUserPosts, action.payload.userId);
-    yield put({
-      type: USER_POSTS_FETCH_SUCCEEDED,
+    const userPosts: PostI[] = yield call(
+      postsApi.getUserPosts,
+      action.payload.userId
+    );
+    yield put<UserPostsAction>({
+      type: UserPostsActionType.FETCH_SUCCEEDED,
       payload: { data: userPosts }
     });
   } catch (error) {
-    yield put({
-      type: USER_POSTS_FETCH_FAILED,
-      payload: error.message
+    yield put<UserPostsAction>({
+      type: UserPostsActionType.FETCH_FAILED,
+      payload: (error as Error).message
     });
   }
 }
 
 export function* userPostsFetchRequestedWatcherSaga() {
   // yield takeEvery(USER_POSTS_FETCH_REQUESTED, fetchUserPostsWorker);
-  yield takeLatest(USER_POSTS_FETCH_REQUESTED, fetchUserPostsWorker);
+  yield takeLatest(UserPostsActionType.FETCH_REQUESTED, fetchUserPostsWorker);
 }
 
 export function* rootSaga() {
