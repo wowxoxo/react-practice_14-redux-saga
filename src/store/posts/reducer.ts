@@ -1,3 +1,4 @@
+import { PostI } from "../../interfaces/posts";
 import {
   UserPostsActionType,
   SaveUserActionType,
@@ -5,7 +6,13 @@ import {
 } from "./action-types";
 import { UserPostsAction } from "./actions";
 
-const initState = {
+interface PostsState {
+  posts: Array<PostI>;
+  albums: Array<any>;
+  filesUploadingProgress: number;
+}
+
+const initState: PostsState = {
   posts: [],
   albums: [],
   filesUploadingProgress: 0

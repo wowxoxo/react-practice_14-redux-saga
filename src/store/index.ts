@@ -8,3 +8,6 @@ export const mainReducer = combineReducers({
   posts: postsReducer,
   login: loginReducer
 });
+
+export type AppState0 = typeof mainReducer;
+export type AppState = ReturnType<typeof mainReducer>;

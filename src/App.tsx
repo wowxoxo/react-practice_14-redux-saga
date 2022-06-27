@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   CHANGE_USERNAME,
   USER_POSTS_FETCH_CANCEL,
@@ -14,9 +14,14 @@ import Uploader from "./Uploader";
 import { Form } from "react-bootstrap";
 import React from "react";
 import { requestUserPosts } from "./store/posts/actions-creators";
+import { AppState } from "./store";
+import { getUserPostsSelector } from "./store/selectors";
 
 function App() {
+  console.log("RERENDER");
   const dispatch = useDispatch();
+  // const posts = useSelector((state: AppState) => state.posts.posts);
+  const posts = useSelector(getUserPostsSelector);
   const handleClick = () => {
     try {
       for (let dispatchId = 1; dispatchId <= 5; dispatchId++) {
@@ -51,6 +56,12 @@ function App() {
       <Button type="button" variant="primary" onClick={handleClick}>
         Click
       </Button>
+      <h2>Posts</h2>
+      <ul>
+        {posts.map((post) => (
+          <li>{post.title}</li>
+        ))}
+      </ul>
       <Button type="button" variant="danger" onClick={handleCancelClick}>
         Cancel
       </Button>
